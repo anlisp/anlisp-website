@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>your site</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
 
-// ============================================================
-// THEME TOGGLE
-// Switches between "aero" (default) and "modern" [data-theme]
-// Remembers choice across every page via localStorage
-// ============================================================
+    <h1>Welcome</h1>
 
+    <script>
+      
 (function () {
   const STORAGE_KEY = "site-theme";
   const root = document.documentElement;
@@ -51,3 +55,6 @@
     btn.addEventListener("click", toggleTheme);
   });
 })();
+    </script>
+</body>
+</html>
