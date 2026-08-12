@@ -1,0 +1,99 @@
+/* ============================================================
+   THEME SYSTEM
+   Default = frutiger aero (glassy, gradient, water/sky palette)
+   [data-theme="modern"] = flat, minimal override
+   ============================================================ */
+
+:root {
+  /* -- aero (default) -- */
+  --bg-gradient: linear-gradient(180deg, #cdeeff 0%, #eaffea 100%);
+  --bg-image: none; /* swap in a water/sky image if you want */
+  --panel-bg: rgba(255, 255, 255, 0.35);
+  --panel-border: rgba(255, 255, 255, 0.65);
+  --text-color: #12415a;
+  --heading-color: #0a6ea8;
+  --accent: #35b6ff;
+  --accent-2: #8ee000;
+  --link-color: #0077aa;
+  --link-hover: #35b6ff;
+  --shadow: 0 4px 24px rgba(0, 150, 200, 0.25);
+  --font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  --radius: 20px;
+  --blur: blur(8px);
+  --border-width: 1px;
+}
+
+[data-theme="modern"] {
+  --bg-gradient: #101012;
+  --bg-image: none;
+  --panel-bg: #19191c;
+  --panel-border: #2a2a2e;
+  --text-color: #e7e7ea;
+  --heading-color: #ffffff;
+  --accent: #7c5cff;
+  --accent-2: #ff5c8a;
+  --link-color: #b3a4ff;
+  --link-hover: #7c5cff;
+  --shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+  --font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --radius: 6px;
+  --blur: none;
+  --border-width: 0px;
+}
+
+/* -- apply the variables -- */
+
+html, body {
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3 {
+  color: var(--heading-color);
+  transition: color 0.4s ease;
+}
+
+a {
+  color: var(--link-color);
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--link-hover);
+}
+
+/* use this class on any card/box/nav panel you want themed */
+.panel, .card, .glass {
+  background: var(--panel-bg);
+  border: var(--border-width) solid var(--panel-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  transition: background 0.4s ease, border-color 0.4s ease,
+              box-shadow 0.4s ease, border-radius 0.4s ease;
+}
+
+/* -- the toggle button itself -- */
+#themeToggle {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 9999;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: var(--border-width) solid var(--panel-border);
+  background: var(--panel-bg);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  transition: all 0.3s ease;
+}
+#themeToggle:hover {
+  transform: translateY(-2px);
+}
