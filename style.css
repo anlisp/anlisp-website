@@ -1,0 +1,115 @@
+:root { --bg: #0e0e0e; --fg: #e8e8e8; --dim: #888; }
+[data-theme="light"] { --bg: #f6f6f4; --fg: #161616; --dim: #777; }
+
+* { box-sizing: border-box; }
+
+html { font-size: 20px; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  line-height: 1.6;
+  transition: background 0.2s, color 0.2s;
+}
+
+a { color: var(--fg); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.dim { color: var(--dim); }
+
+.layout { display: flex; min-height: 100vh; }
+
+main { flex: 1; padding: 56px; }
+h1 { font-size: 1.2rem; font-weight: normal; color: var(--dim); margin: 0 0 32px; }
+
+/* right-side navbar */
+nav {
+  width: 200px;
+  padding: 56px 40px 32px 0;
+  text-align: right;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+nav a { display: block; color: var(--dim); margin-bottom: 12px; }
+nav a:hover, nav a.active { color: var(--fg); }
+
+.nav-extra { margin-top: auto; font-size: 0.8rem; color: var(--dim); }
+.nav-extra a { margin-bottom: 6px; }
+
+/* links page */
+.link-list a { display: block; margin-bottom: 16px; }
+.now { margin-top: 48px; }
+
+/* buttons */
+.btn {
+  display: block;
+  border: 1px solid var(--dim);
+  background: none;
+  color: var(--fg);
+  font: inherit;
+  padding: 16px 24px;
+  text-align: center;
+  cursor: pointer;
+}
+.btn:hover { background: var(--fg); color: var(--bg); text-decoration: none; }
+
+/* games page */
+.game-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+
+/* gallery */
+.grid { columns: 3 300px; column-gap: 16px; }
+.grid img { width: 100%; display: block; margin-bottom: 16px; }
+
+/* random page */
+.random-out { margin-bottom: 32px; min-height: 120px; }
+.random-out img { max-width: 100%; max-height: 60vh; display: block; }
+.random-out .by { color: var(--dim); margin-top: 8px; }
+.random-out p { margin: 0; font-size: 1.2rem; }
+
+/* pixel canvas */
+#pixels { background: #fff; width: 100%; max-width: 512px; image-rendering: pixelated; touch-action: none; display: block; border: 1px solid var(--dim); }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 16px; max-width: 512px; }
+.tools .btn { padding: 8px 16px; }
+.swatch { width: 32px; height: 32px; border: 1px solid var(--dim); cursor: pointer; padding: 0; }
+.tools input[type="color"] { width: 40px; height: 36px; border: 1px solid var(--dim); background: none; padding: 0; cursor: pointer; }
+
+/* now playing */
+#now-playing {
+  position: fixed;
+  left: 32px;
+  bottom: 32px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--dim);
+  max-width: calc(100% - 64px);
+}
+#now-playing img { width: 72px; height: 72px; display: block; flex-shrink: 0; }
+#now-playing .label { font-size: 0.8rem; }
+#now-playing .track { color: var(--fg); }
+
+/* phones: nav moves to the top, bigger tap targets */
+@media (max-width: 700px) {
+  html { font-size: 18px; }
+  .layout { flex-direction: column-reverse; }
+  nav {
+    width: 100%;
+    height: auto;
+    position: static;
+    text-align: left;
+    padding: 24px 24px 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0 24px;
+  }
+  nav a { margin: 0; padding: 8px 0; }
+  .nav-extra { margin-top: 8px; width: 100%; display: flex; flex-wrap: wrap; gap: 0 16px; }
+  .nav-extra a { margin: 0; }
+  main { padding: 24px 24px 140px; }
+  #now-playing { left: 16px; bottom: 16px; max-width: calc(100% - 32px); background: var(--bg); padding: 8px 0; }
+}

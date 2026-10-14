@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>anlisp</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="theme.js"></script>
+</head>
+<body>
+    <div class="layout">
+        <main>
+            <h1>pixel canvas</h1>
+            <canvas id="pixels"></canvas>
+            <div class="tools">
+                <input type="color" id="color-picker" value="#000000">
+                <button class="swatch" data-color="#000000"></button>
+                <button class="swatch" data-color="#e63946"></button>
+                <button class="swatch" data-color="#f4a261"></button>
+                <button class="swatch" data-color="#e9c46a"></button>
+                <button class="swatch" data-color="#2a9d8f"></button>
+                <button class="swatch" data-color="#457b9d"></button>
+                <button class="swatch" data-color="#9b5de5"></button>
+                <button class="btn" id="eraser">erase</button>
+                <button class="btn" id="clear">clear</button>
+                <button class="btn" id="save">save</button>
+            </div>
+        </main>
+        <nav>
+            <a href="index.html">links</a>
+            <a href="gallery.html">gallery</a>
+            <a href="games.html" class="active">games</a>
+        </nav>
+    </div>
+
+    <div id="now-playing"></div>
+    <script src="widgets.js"></script>
+    <script src="now-playing.js"></script>
+    <script src="canvas.js"></script>
+</body>
+</html>
