@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../theme.js"></script>
+    <style>
+        .calc { max-width: 360px; margin: 0 auto; padding: 32px 16px; }
+        .calc a.back { display: inline-block; color: var(--dim); margin-bottom: 24px; }
+        #screen { border: 1px solid var(--dim); padding: 16px; text-align: right; font-size: 1.8rem; margin-bottom: 8px; overflow: hidden; }
+        #expr { text-align: right; color: var(--dim); font-size: 0.8rem; min-height: 1.4em; }
+        .keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .keys .btn { padding: 16px 0; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+    <div class="calc">
+        <a class="back" href="../games.html">&larr; back</a>
+        <div id="expr"></div>
+        <div id="screen">0</div>
+        <div class="keys" id="keys"></div>
+    </div>
+    <script>
+        const KEYS = ["C","⌫","%","÷","7","8","9","×","4","5","6","−","1","2","3","+","±","0",".","="];
+        const screen = document.getElementById("screen");
+        const exprEl = document.getElementById("expr");
+        const keys = document.getElementById("keys");
+
+        let current = "0", previous = null, op = null, fresh = true;
+
+        function calc(a, b, o) {
+            a = parseFloat(a); b = parseFloat(b);
+            if (o === "+") return a + b;
+            if (o === "−") return a - b;
+            if (o === "×") return a * b;
+            if (o === "÷") return b === 0 ? NaN : a / b;
+            return b;
+        }
+        function fmt(n) {
+            if (!isFinite(n)) return "error";
+            return String(parseFloat(n.toPrecision(12)));
+        }
+        function render() {
+            screen.textContent = current;
+            exprEl.textContent = previous !== null && op ? `${previous} ${op}` : "";
+        }
+
+        function press(k) {
+            if (current === "error" && k !== "C") return;
+            if (/^[0-9]$/.test(k)) {
+                current = fresh || current === "0" ? k : current + k;
+                fresh = false;
+            } else if (k === ".") {
+                if (fresh) { current = "0."; fresh = false; }
+                else if (!current.includes(".")) current += ".";
+            } else if (k === "C") {
+                current = "0"; previous = null; op = null; fresh = true;
+            } else if (k === "⌫") {
+                if (!fresh) current = current.length > 1 ? current.slice(0, -1) : "0";
+            } else if (k === "±") {
+                if (current !== "0") current = current.startsWith("-") ? current.slice(1) : "-" + current;
+            } else if (k === "%") {
+                current = fmt(parseFloat(current) / 100); fresh = true;
+            } else if (k === "=") {
+                if (op !== null) {
+                    current = fmt(calc(previous, current, op));
+                    previous = null; op = null; fresh = true;
+                }
+            } else {
+                // operator
+                if (op !== null && !fresh) current = fmt(calc(previous, current, op));
+                previous = current; op = k; fresh = true;
+            }
+            render();
+        }
+
+        KEYS.forEach(k => {
+            const b = document.createElement("button");
+            b.className = "btn";
+            b.textContent = k;
+            b.addEventListener("click", () => press(k));
+            keys.appendChild(b);
+        });
+
+        document.addEventListener("keydown", e => {
+            const map = { "*": "×", "/": "÷", "-": "−", "Enter": "=", "Backspace": "⌫", "Escape": "C" };
+            const k = map[e.key] || e.key;
+            if (KEYS.includes(k)) { e.preventDefault(); press(k); }
+        });
+        render();
+    </script>
+</body>
+</html>

@@ -113,3 +113,13 @@ nav a:hover, nav a.active { color: var(--fg); }
   main { padding: 24px 24px 140px; }
   #now-playing { left: 16px; bottom: 16px; max-width: calc(100% - 32px); background: var(--bg); padding: 8px 0; }
 }
+
+/* desktop: centered content column, bigger buttons */
+@media (min-width: 701px) {
+  main { max-width: 960px; margin: 0 auto; }
+  main:has(.grid) { max-width: 1500px; }
+  .game-list .btn { padding: 32px 24px; font-size: 1.1rem; }
+}
+@media (min-width: 1500px) {
+  html { font-size: 22px; }
+}
